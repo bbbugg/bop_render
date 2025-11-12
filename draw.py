@@ -126,7 +126,7 @@ plt.tight_layout(pad=2.0)
 
 # 导出矢量图
 os.makedirs("output_draw", exist_ok=True)
-plt.savefig("output_draw/task_comparison_grouped.svg", format="svg", bbox_inches="tight")
-plt.savefig("output_draw/task_comparison_grouped.pdf", format="pdf", bbox_inches="tight")
+plt.savefig("output_draw/柱状图.svg", format="svg", bbox_inches="tight")
+plt.savefig("output_draw/柱状图.pdf", format="pdf", bbox_inches="tight")
 
 plt.show()

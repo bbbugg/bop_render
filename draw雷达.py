@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 import matplotlib.pyplot as plt
 from math import pi
@@ -111,4 +113,9 @@ legend = ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.12),
                    ncol=ncols, fontsize=10, frameon=False)
 
 # plt.title("Customizable Multi-series Radar Chart", y=1.02, fontsize=14)
+
+os.makedirs("output_draw", exist_ok=True)
+plt.savefig("output_draw/雷达.svg", format="svg", bbox_inches="tight")
+plt.savefig("output_draw/雷达.pdf", format="pdf", bbox_inches="tight")
+
 plt.show()
