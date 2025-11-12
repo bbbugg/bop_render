@@ -45,8 +45,8 @@ varying vec3 v_normal;
 
 void main() {
     gl_Position = u_mvp * vec4(a_position, 1.0);
-    //v_color = a_color;
-    v_color = vec3(1.0,1.0,1.0);
+    v_color = a_color;
+    //v_color = vec3(1.0,1.0,1.0);
     v_texcoord = a_texcoord;
 
     // The following points/vectors are expressed in the eye coordinates.
@@ -277,7 +277,7 @@ class SingletonArgs(type):
   assert SingletonArgs('spam') is SingletonArgs('spam')
   
   Source: https://gist.github.com/wowkin2/3af15bfbf197a14a2b0b2488a1e8c787
-  """
+"""
   _instances = {}
   _init = {}
 
@@ -340,7 +340,7 @@ class RendererVispy(Renderer, app.Canvas, metaclass=SingletonArgs):
 
     # Per-object vertex and index buffer.
     self.vertex_buffers = {}
-    self.index_buffers = {}
+    # self.index_buffers = {}
 
     # Per-object OpenGL programs for rendering of RGB and depth images.
     self.rgb_programs = {}
@@ -456,7 +456,7 @@ class RendererVispy(Renderer, app.Canvas, metaclass=SingletonArgs):
 
     # Create vertex and index buffer for the loaded object model.
     self.vertex_buffers[obj_id] = gloo.VertexBuffer(vertices)
-    self.index_buffers[obj_id] = gloo.IndexBuffer(model["faces"].flatten().astype(np.uint32))
+    # self.index_buffers[obj_id] = gloo.IndexBuffer(model["faces"].flatten().astype(np.uint32))
 
     # Set shader for the selected shading.
     if self.shading == "flat":
@@ -468,7 +468,7 @@ class RendererVispy(Renderer, app.Canvas, metaclass=SingletonArgs):
 
     # Prepare the RGB OpenGL program.
     if self.mode == 'rgb':
-      rgb_program = gloo.Program(_depth_vertex_code, _depth_fragment_code)
+      rgb_program = gloo.Program(_rgb_vertex_code, rgb_fragment_code)
     elif self.mode == 'mask':
       rgb_program = gloo.Program(_rgb_vertex_code, rgb_fragment_code)
     elif self.mode == 'depth':
@@ -495,7 +495,7 @@ class RendererVispy(Renderer, app.Canvas, metaclass=SingletonArgs):
     if obj_id in self.model_textures:
       del self.model_textures[obj_id]
     del self.vertex_buffers[obj_id]
-    del self.index_buffers[obj_id]
+    # del self.index_buffers[obj_id]
     del self.rgb_programs[obj_id]
     del self.depth_programs[obj_id]
 
@@ -571,7 +571,10 @@ class RendererVispy(Renderer, app.Canvas, metaclass=SingletonArgs):
     program["u_mvp"] = _calc_model_view_proj(mat_model, mat_view, mat_proj)
 
     # Rendering.
-    program.draw("triangles", self.index_buffers[obj_id])
+    # 使用点模式渲染
+    gl.glPointSize(8.0)  # 设置点的大小，可以根据需要调整 todo
+    program.draw("points")
+    # program.draw("triangles", self.index_buffers[obj_id])
 
     # Get the content of the FBO texture.
     rgb = gl.glReadPixels(0, 0, self.width, self.height, gl.GL_RGB, gl.GL_UNSIGNED_BYTE)
@@ -593,7 +596,10 @@ class RendererVispy(Renderer, app.Canvas, metaclass=SingletonArgs):
     program["u_mvp"] = _calc_model_view_proj(mat_model, mat_view, mat_proj)
 
     # Rendering.
-    program.draw("triangles", self.index_buffers[obj_id])
+    # 使用点模式渲染
+    gl.glPointSize(1.0)  # 设置点的大小，可以根据需要调整 todo
+    program.draw("points")
+    # program.draw("triangles", self.index_buffers[obj_id])
 
     dep = gl.glReadPixels(0, 0, self.width, self.height, gl.GL_DEPTH_COMPONENT, gl.GL_FLOAT)
     # self.depth = self.depth.reshape(self.height, self.width)

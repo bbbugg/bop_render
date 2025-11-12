@@ -480,11 +480,13 @@ def load_ply(path):
 
   is_normal = False
   if {'nx', 'ny', 'nz'}.issubset(set(pt_props_names)):
+    print('read normals')
     is_normal = True
     model['normals'] = np.zeros((n_pts, 3), np.float64)
 
   is_color = False
   if {'red', 'green', 'blue'}.issubset(set(pt_props_names)):
+    print('read RGB')
     is_color = True
     model['colors'] = np.zeros((n_pts, 3), np.float64)
 
@@ -503,6 +505,7 @@ def load_ply(path):
     'float': ('f', 4),
     'double': ('d', 8),
     'int': ('i', 4),
+    'uint': ('I', 4),  # 添加对无符号整数的支持
     'uchar': ('B', 1)
   }
 
