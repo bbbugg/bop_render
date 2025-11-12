@@ -186,6 +186,6 @@ for ax in axes[:n_tasks]:
     ax.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
 
 os.makedirs("output_draw", exist_ok=True)
-plt.savefig("output_draw/折线1.png", bbox_inches='tight', dpi=300)
+plt.savefig("output_draw/折线1.svg", bbox_inches='tight')
 plt.savefig("output_draw/折线1.pdf", bbox_inches='tight')
 plt.show()

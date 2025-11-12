@@ -73,6 +73,6 @@ ax.legend(handles=legend_elements, loc='lower center', bbox_to_anchor=(0.5, -0.1
 
 plt.tight_layout()
 plt.subplots_adjust(bottom=0.22)
-plt.savefig("bar_performance_comparison.png", dpi=300, bbox_inches='tight')
+plt.savefig("bar_performance_comparison.svg", bbox_inches='tight')
 plt.savefig("bar_performance_comparison.pdf", bbox_inches='tight')
 plt.show()
