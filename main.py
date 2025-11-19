@@ -48,7 +48,7 @@ if __name__ == '__main__':
     input_file = "jixiebi.ply"
     # output_file = "temp.ply"
     # output_file = "droid_1 (1).ply"
-    output_file = "jixiebi.ply"
+    output_file = "arm_point_cloud.ply"
     # output_file = "model.ply"
 
     # 使用新函数进行点云转mesh
@@ -80,7 +80,7 @@ if __name__ == '__main__':
     img = res['rgb']
     img_bgr = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     # cv2.imwrite("limingyan.png", img_bgr)
-    cv2.imwrite("limingyan_flat.png", img_bgr)
+    cv2.imwrite("arm_point_cloud.png", img_bgr)
     # cv2.imwrite("limingyan.png",img)
     # cv2.imshow("hhh.png",img)
     # cv2.waitKey(0)
