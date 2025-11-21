@@ -48,7 +48,7 @@ if __name__ == '__main__':
     input_file = "jixiebi.ply"
     # output_file = "temp.ply"
     # output_file = "droid_1 (1).ply"
-    output_file = "arm_point_cloud.ply"
+    output_file = "carrot_basket2.ply"
     # output_file = "model.ply"
 
     # 使用新函数进行点云转mesh
@@ -74,13 +74,15 @@ if __name__ == '__main__':
     st = time.time()
     for i in range(1):
         # R = GetR(40,50,40)
-        R = GetR(90,0,0)
+        R = GetR(50,0,0)
         res = ren_rgb.render_object(0,R,np.array([0,0,0.5]),1957.289,1957.043,2048.868,1524.94)
     print('time: ',time.time()-st)
     img = res['rgb']
     img_bgr = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     # cv2.imwrite("limingyan.png", img_bgr)
-    cv2.imwrite("arm_point_cloud.png", img_bgr)
+    img_name = output_file.rsplit('.', 1)[0]
+    cv2.imwrite(f"{img_name}.png", img_bgr)
+    print(f"save to {img_name}.png")
     # cv2.imwrite("limingyan.png",img)
     # cv2.imshow("hhh.png",img)
     # cv2.waitKey(0)
